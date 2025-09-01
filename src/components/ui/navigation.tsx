@@ -7,10 +7,14 @@ import {
   Users, 
   Search,
   Bell,
-  User
+  User,
+  Brain
 } from "lucide-react";
+import { useLocation } from "react-router-dom";
 
 const NavigationHeader = () => {
+  const location = useLocation();
+  
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-card/80 backdrop-blur-md">
       <div className="container flex h-16 items-center justify-between px-6">
@@ -25,17 +29,31 @@ const NavigationHeader = () => {
           </div>
           
           <nav className="hidden md:flex items-center gap-6">
-            <Button variant="ghost" className="gap-2 text-foreground/80 hover:text-foreground">
+            <Button 
+              variant="ghost" 
+              className={cn(
+                "gap-2 hover:text-foreground",
+                location.pathname === "/" ? "text-foreground bg-muted" : "text-foreground/60"
+              )}
+              onClick={() => window.location.href = "/"}
+            >
               <TrendingUp className="h-4 w-4" />
-              Dashboard
+              Dashboard Principal
+            </Button>
+            <Button 
+              variant="ghost" 
+              className={cn(
+                "gap-2 hover:text-foreground",
+                location.pathname === "/intelligence" ? "text-foreground bg-muted" : "text-foreground/60"
+              )}
+              onClick={() => window.location.href = "/intelligence"}
+            >
+              <Brain className="h-4 w-4" />
+              Inteligencia de Precios
             </Button>
             <Button variant="ghost" className="gap-2 text-foreground/60 hover:text-foreground">
               <Search className="h-4 w-4" />
               Productos
-            </Button>
-            <Button variant="ghost" className="gap-2 text-foreground/60 hover:text-foreground">
-              <Users className="h-4 w-4" />
-              Competidores
             </Button>
             <Button variant="ghost" className="gap-2 text-foreground/60 hover:text-foreground">
               <Settings className="h-4 w-4" />
